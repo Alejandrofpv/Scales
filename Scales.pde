@@ -1,55 +1,31 @@
+
+
 void setup(){
   size(900, 900);
 }
+
 void draw(){
-  scalem(250, 250);
-}
-void scalem(int x, int y){
-  float g = 0;
-  noStroke();
-  for(int y1 = 50; y1 > 5; y1-=5){
-    for(int x3 = 200; x3 > 20; x3-=20){
-      for(int x2 = 190; x2 > 19; x2-=19){
-        for(int x1 = 110; x1 > 11; x1-=11){
-          fill(g, 0, 0);                     
-          beginShape();
-          vertex(x, y);
-          bezierVertex(x - x1, y - y1, x - x2, y - y1, x - x3, y);
-          endShape();  
-          g = g + 0.02;
-        }
-      }
+  boolean shift = true;
+  int r = 0;
+  for(int y = 0; y <= 900; y+=50){
+    for(int x = 0; x <= 900; x+=50){
+      if(shift == true)
+        scalem(x + 25, y, r);
+      else
+        scalem(x, y, r);
     }
+    if(shift == true)
+      shift = false;
+    else
+      shift = true;
+    r = r + 20;
   }
-  
-  
-  /*for(int x3 = 200; x3 >= 20; x3-=20){
-    for(int y1 = 50; y1 >= 5; y1-=5){
-      for(int x1 = 110; x1 >= 11; x1-=11){
-        for(int x2 = 190; x2 >= 19; x2-=19){
-          fill(g, 0, 0);                     
-          beginShape();
-          vertex(x, y);
-          bezierVertex(x - x1, y - y1, x - x2, y - y1, x - 200, y);
-          endShape();  
-          g = g + 0.2;
-        }
-      }
-    }
-  }*/
-  
-  
-  
-  fill(0);
-  beginShape();
-  vertex(x, y);
-  bezierVertex(x - 11, y - 5, x - 19, y - 5, x - 20, y);
-  //vertex(x, y);
-  //bezierVertex(x - 11, y + 5, x - 19, y + 5, x - 20, y);
-  endShape();
-  
-  
-  stroke(0, 0, 0);
-  strokeWeight(5);
-  point(x, y);
+}
+
+void scalem(int x, int y, int r){
+  stroke(1);
+  fill(r, 0, 0);
+  noStroke();
+  bezier(x, y, x + 00, y + 10, x, y + 20, x + 30, y + 30);
+  bezier(x + 30, y + 10, x, y, x + 30, y + 30, x, y + 20);
 }
